@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class Group(models.Model):
     def __str__(self) -> str:
         return self.title
@@ -10,6 +11,7 @@ class Group(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True,
                             verbose_name='URL')
     description = models.TextField()
+
 
 class Post(models.Model):
     text = models.TextField()
@@ -19,5 +21,5 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-    group = models.ForeignKey(Group, blank=True, null=True, 
+    group = models.ForeignKey(Group, blank=True, null=True,
                               on_delete=models.CASCADE)
