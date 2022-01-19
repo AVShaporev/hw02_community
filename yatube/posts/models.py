@@ -5,12 +5,13 @@ User = get_user_model()
 
 
 class Group(models.Model):
-    def __str__(self) -> str:
-        return self.title
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=255, unique=True, db_index=True,
                             verbose_name='URL')
     description = models.TextField()
+    
+    def __str__(self) -> str:
+        return self.title
 
 
 class Post(models.Model):
@@ -22,4 +23,7 @@ class Post(models.Model):
         related_name='posts'
     )
     group = models.ForeignKey(Group, blank=True, null=True,
-                              on_delete=models.CASCADE)
+                              on_delete=models.SET_NULL)
+
+    class Meta:
+        ordering = ['-pub_date']
