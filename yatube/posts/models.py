@@ -9,7 +9,7 @@ class Group(models.Model):
     slug = models.SlugField(max_length=255, unique=True, db_index=True,
                             verbose_name='URL')
     description = models.TextField()
-    
+
     def __str__(self) -> str:
         return self.title
 
